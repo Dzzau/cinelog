@@ -1,16 +1,64 @@
-# React + Vite
+# 🎬 CineLog
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Личный трекер фильмов на React. Можно найти необходимый фильм, просмотреть его описание и добавить в список просмотров.
 
-Currently, two official plugins are available:
+🌐 **[Открыть сайт](https://dzzau.github.io/cinelog/)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Скриншот
 
-## React Compiler
+![screenshot.png](public/screenshot.png)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Технологии
 
-## Expanding the ESLint configuration
+- **React 19** — UI библиотека
+- **React Router v7** — роутинг
+- **Zustand** — стейт-менеджмент
+- **Axios** — HTTP запросы
+- **Tailwind CSS v4** — стили
+- **Vite** — сборщик
+- **TMDB API** — база данных фильмов
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Функциональность
+
+- Поиск фильмов с дебаунсом
+- Детальная страница каждого фильма
+- Личный список просмотров
+- Сохранение списка в localStorage
+- Защищённые роуты (ProtectedRoute)
+- Lazy loading страниц
+
+## React концепции в проекте
+
+| Концепция | Где используется |
+|-----------|-----------------|
+| `useState` | Поиск, авторизация |
+| `useEffect` | Загрузка данных, дебаунс |
+| `useRef` | Автофокус на поиск |
+| `useContext` | Тема приложения |
+| `useParams` | ID фильма из URL |
+| `useNavigate` | Навигация назад |
+| `React.memo` | Оптимизация MovieCard |
+| `lazy + Suspense` | Lazy loading страниц |
+| `Zustand` | Глобальный стейт watchlist |
+| `Custom Hook` | useMovieSearch с дебаунсом |
+| `ProtectedRoute` | Защита страницы watchlist |
+
+## Запуск локально
+```bash
+git clone https://github.com/Dzzau/cinelog.git
+cd cinelog
+npm install
+```
+
+Создай файл `.env`:
+```
+VITE_TMDB_TOKEN=твой_токен
+VITE_TMDB_BASE_URL=https://api.themoviedb.org/3
+```
+```bash
+npm run dev
+```
+
+## Автор
+
+Melnikova Dana
