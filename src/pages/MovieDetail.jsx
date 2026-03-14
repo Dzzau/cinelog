@@ -1,8 +1,9 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import {useEffect, useRef, useState} from 'react'
 import { getMovieById } from '../api/movies.js'
 import useWatchlistStore from '../store/useWatchlistStore.js'
 import Spinner from "../components/Spinner.jsx";
+import StarRating from "../components/StarRating.jsx";
 
 function MovieDetail() {
     const { id } = useParams()
@@ -11,6 +12,10 @@ function MovieDetail() {
     const [movie, setMovie] = useState(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const starRef = useRef(null)
+    const scrollToRating = () => {
+        starRef.current.scrollIntoView({behavior: 'smooth'})
+    }
 
     useEffect(() => {
         const getMovie = async () => {
@@ -28,7 +33,6 @@ function MovieDetail() {
 
     if (loading) return <Spinner />
     if (error) return <div className="flex items-center justify-center h-64 text-red-400">{error}</div>
-
     return (
         <div className="max-w-5xl mx-auto px-8 py-10">
             <button
@@ -49,8 +53,27 @@ function MovieDetail() {
                     <h1 style={{ fontFamily: 'Bebas Neue' }} className="text-5xl tracking-wide text-white">
                         {movie.title}
                     </h1>
-                    <p className="text-amber-400 text-lg">⭐ {movie.vote_average.toFixed(1)}</p>
-                    <p className="text-white/50 text-sm">{movie.release_date?.slice(0, 4)}</p>
+                    <button
+                        onClick={scrollToRating}
+                        className="text-amber-400 text-sm hover:underline"
+                    >
+                        ↓ Перейти к рейтингу
+                    </button>
+                    {movie.tagline && (
+                        <p className="text-white/40 italic text-sm">"{movie.tagline}"</p>
+                    )}
+                    <div className="flex gap-4 text-sm text-white/50">
+                        <span>📅 {movie.release_date?.slice(0, 4)}</span>
+                        <span>⏱ {movie.runtime} мин</span>
+                        <span>🗳 {movie.vote_count} оценок</span>
+                    </div>
+                    <div className="flex gap-2 flex-wrap">
+                        {movie.genres.map(genre => (
+                            <span key={genre.id} className="px-3 py-1 rounded-full border border-white/20 text-white/60 text-xs">
+                            {genre.name}
+                        </span>
+                        ))}
+                    </div>
                     <p className="text-white/70 leading-relaxed max-w-xl">{movie.overview}</p>
                     <button
                         onClick={() => addToWatched(movie)}
@@ -63,6 +86,10 @@ function MovieDetail() {
                         {isInWatched(movie.id) ? '✓ В списке' : '+ Добавить'}
                     </button>
                 </div>
+            </div>
+
+            <div className="mt-16 border-t border-white/10 pt-10">
+                <StarRating ref={starRef} rating={movie.vote_average.toFixed(1)} />
             </div>
         </div>
     )
