@@ -4,7 +4,7 @@ import {useState} from "react";
 function Navbar() {
 
 
-    const [isAuth, setIsAuth] = useState(!!localStorage.getItem("isAuth"));
+    const [isAuth, setIsAuth] = useState<boolean>(!!localStorage.getItem("isAuth"));
 const handleAuth = () =>{ if (isAuth) {
     localStorage.removeItem('isAuth');
     setIsAuth(false);

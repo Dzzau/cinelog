@@ -1,8 +1,8 @@
 import { useState } from "react"
-import MovieCard from "../components/MovieCard.jsx"
-import SearchBar from "../components/SearchBar.jsx"
-import useMovieSearch from "../hooks/useMovieSearch.js"
-import Spinner from "../components/Spinner.jsx";
+import MovieCard from "../components/MovieCard"
+import SearchBar from "../components/SearchBar"
+import useMovieSearch from "../hooks/useMovieSearch"
+import Spinner from "../components/Spinner";
 
 function Home() {
     const [query, setQuery] = useState("")

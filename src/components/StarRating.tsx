@@ -1,6 +1,10 @@
 import {forwardRef} from "react";
 
-const StarRating = forwardRef( (props, ref) => {
+interface StarRatingProps {
+    rating: string;
+}
+
+const StarRating = forwardRef<HTMLDivElement, StarRatingProps>( (props, ref) => {
     const {rating} = props;
 
     return (

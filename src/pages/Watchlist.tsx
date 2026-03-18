@@ -1,4 +1,4 @@
-import useWatchlistStore from '../store/useWatchlistStore.js'
+import useWatchlistStore from '../store/useWatchlistStore'
 import { Link } from 'react-router-dom'
 
 function Watchlist() {

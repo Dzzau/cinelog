@@ -1,26 +1,27 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import {useEffect, useRef, useState} from 'react'
-import { getMovieById } from '../api/movies.js'
-import useWatchlistStore from '../store/useWatchlistStore.js'
-import Spinner from "../components/Spinner.jsx";
-import StarRating from "../components/StarRating.jsx";
+import { getMovieById } from '../api/movies'
+import useWatchlistStore from '../store/useWatchlistStore'
+import Spinner from "../components/Spinner";
+import StarRating from "../components/StarRating";
+import {Movie} from "../types";
 
 function MovieDetail() {
-    const { id } = useParams()
+    const { id } = useParams<{id: string}>()
     const navigate = useNavigate()
     const { addToWatched, isInWatched } = useWatchlistStore()
-    const [movie, setMovie] = useState(null)
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
-    const starRef = useRef(null)
+    const [movie, setMovie] = useState<Movie | null>(null)
+    const [loading, setLoading] = useState<boolean>(true)
+    const [error, setError] = useState<string | null>(null)
+    const starRef = useRef<HTMLDivElement>(null)
     const scrollToRating = () => {
-        starRef.current.scrollIntoView({behavior: 'smooth'})
+        starRef.current?.scrollIntoView({behavior: 'smooth'})
     }
 
     useEffect(() => {
         const getMovie = async () => {
             try {
-                const response = await getMovieById(id)
+                const response = await getMovieById(id!)
                 setMovie(response.data)
             } catch (error) {
                 setError('Что-то пошло не так')
@@ -33,6 +34,7 @@ function MovieDetail() {
 
     if (loading) return <Spinner />
     if (error) return <div className="flex items-center justify-center h-64 text-red-400">{error}</div>
+    if (!movie) return null
     return (
         <div className="max-w-5xl mx-auto px-8 py-10">
             <button

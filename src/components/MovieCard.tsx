@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import { memo } from 'react'
+import {Movie} from "../types";
 
-const MovieCard = memo(function MovieCard({ movie }) {
+const MovieCard = memo(function MovieCard({ movie }:{movie: Movie}) {
     return (
         <Link to={`/movie/${movie.id}`} className="group block">
             <div className="relative overflow-hidden rounded-lg bg-white/5 border border-white/10 transition-all duration-300 group-hover:border-amber-400/40 group-hover:scale-105">

@@ -1,9 +1,14 @@
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, ChangeEvent} from "react";
 
-function SearchBar({ value, onChange }) {
-    const inputRef = useRef(null);
+interface SearchBarProps {
+    value: string;
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export default  function SearchBar({ value, onChange }: SearchBarProps) {
+    const inputRef = useRef<HTMLInputElement>(null);
     useEffect(() => {
-        inputRef.current.focus();
+        inputRef.current?.focus();
     },[])
     return (
         <div className="relative max-w-xl mx-auto">
@@ -19,5 +24,3 @@ function SearchBar({ value, onChange }) {
         </div>
     )
 }
-
-export default SearchBar

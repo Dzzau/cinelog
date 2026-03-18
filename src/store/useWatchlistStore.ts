@@ -1,7 +1,15 @@
 import {create} from "zustand";
 import {persist} from "zustand/middleware";
+import {Movie} from "../types";
 
-const useWatchlistStore = create(
+interface WatchlistStore {
+    watched: Movie[];
+    addToWatched: (movie: Movie) => void;
+    removeFromWatched: (id: number) => void;
+    isInWatched: (id: number) => boolean;
+}
+
+const useWatchlistStore = create<WatchlistStore>()(
     persist(
         (set, get) =>({
             watched: [],

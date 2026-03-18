@@ -1,6 +1,11 @@
 import {Navigate} from "react-router-dom";
+import {ReactNode} from "react";
 
-function ProtectedRoute({children}) {
+interface ProtectedRouteProps {
+    children: ReactNode;
+}
+
+function ProtectedRoute({children}: ProtectedRouteProps) {
     const isAuth = localStorage.getItem("isAuth");
 
     if (!isAuth) {

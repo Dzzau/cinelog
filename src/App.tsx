@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
-import Navbar from "./components/Navbar.jsx"
-import Spinner from "./components/Spinner.jsx";
-import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import Navbar from "./components/Navbar"
+import Spinner from "./components/Spinner";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const Home = lazy(() => import('./pages/Home'))
 const MovieDetail = lazy(() => import('./pages/MovieDetail'))

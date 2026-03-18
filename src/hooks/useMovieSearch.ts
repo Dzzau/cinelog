@@ -1,10 +1,11 @@
 import {useEffect, useState} from "react";
-import {getPopularMovies, searchMovies} from "../api/movies.js";
+import {getPopularMovies, searchMovies} from "../api/movies";
+import {Movie} from "../types";
 
-function useMovieSearch(query) {
-    const [movies, setMovies] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+function useMovieSearch(query: string) {
+    const [movies, setMovies] = useState<Movie[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const timer = setTimeout(() => {
