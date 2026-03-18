@@ -11,6 +11,7 @@
 ## Технологии
 
 - **React 19** — UI библиотека
+- **TypeScript** — типизация
 - **React Router v7** — роутинг
 - **Zustand** — стейт-менеджмент
 - **Axios** — HTTP запросы
@@ -21,11 +22,10 @@
 ## Функциональность
 
 - Поиск фильмов с дебаунсом
-- Детальная страница с жанрами, слоганом, длительностью для каждого фильма
+- Детальная страница с жанрами, слоганом, длительностью
 - Авторизация через localStorage
 - Скролл к рейтингу через forwardRef
-- Личный список просмотров
-- Сохранение списка в localStorage
+- Личный список просмотров с сохранением в localStorage
 - Защищённые роуты (ProtectedRoute)
 - Lazy loading страниц
 
@@ -46,6 +46,17 @@
 | `ProtectedRoute` | Защита страницы watchlist |
 | `forwardRef` | StarRating — доступ к DOM из родителя |
 | `ProtectedRoute` | Защита watchlist, редирект неавторизованных |
+
+## TypeScript концепции в проекте
+
+| Концепция | Где используется |
+|-----------|-----------------|
+| `interface` | Movie, Genre, Props компонентов |
+| `generics` | useState, useRef, axios запросы |
+| `union types` | `string \| null` для error стейта |
+| `type inference` | Автовывод типов в компонентах |
+| `optional fields` | `runtime?`, `tagline?` в Movie |
+| `non-null assertion` | `id!` в useParams |
 
 ## Запуск локально
 ```bash
